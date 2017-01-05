@@ -1,16 +1,16 @@
 --项目关键要素
 select 
-b.c_proj_code,
-b.c_proj_name,
-b.l_setup_date,
-b.l_expiry_date,
-a.c_proj_type,
-a.c_proj_type_n,
-a.c_func_type,
-a.c_func_type_n,
-a.c_affair_props,
-a.c_affair_props_n,
-c.c_inst_name
+b.c_proj_code, --项目编码
+b.c_proj_name, --项目名称
+b.l_setup_date,--成立日期
+b.l_expiry_date,--终止日期
+a.c_proj_type,--项目类型
+a.c_proj_type_n,--项目类型说明
+a.c_func_type,--功能分类
+a.c_func_type_n,--功能分类说明
+a.c_affair_props,--事务性质
+a.c_affair_props_n,--事务性质说明
+c.c_inst_name--推荐分行
 from dim_pb_project_biz a,dim_pb_project_basic b,dim_pb_institution c
 where a.l_Proj_id = b.l_proj_id 
 and a.l_bankrec_sub = c.l_inst_id(+)
