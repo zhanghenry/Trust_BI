@@ -1,0 +1,19 @@
+--项目关键要素
+select 
+b.c_proj_code,
+b.c_proj_name,
+b.l_setup_date,
+b.l_expiry_date,
+a.c_proj_type,
+a.c_proj_type_n,
+a.c_func_type,
+a.c_func_type_n,
+a.c_affair_props,
+a.c_affair_props_n,
+c.c_inst_name
+from dim_pb_project_biz a,dim_pb_project_basic b,dim_pb_institution c
+where a.l_Proj_id = b.l_proj_id 
+and a.l_bankrec_sub = c.l_inst_id(+)
+and b.l_effective_flag = 1
+and nvl(b.l_expiry_date,'20991231') > 20151231 
+order by b.c_proj_code,a.l_proj_id;
