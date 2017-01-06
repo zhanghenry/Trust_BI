@@ -82,3 +82,23 @@ select distinct s.c_proj_code
          where t.l_cont_id = t1.l_cont_id
            and t.l_scatype_id in (9, 10)
            and s.l_proj_id = t1.l_proj_id);
+           
+--项目委托人明细
+select t1.c_proj_code,
+       listagg(t1.c_cust_name, ',') within group(order by t1.c_proj_code)
+  from (select distinct t.c_proj_code,
+                        t.c_fdsrc_name,
+                        case
+                          when t.c_fdsrc_name = '个人自有' then
+                           '个人'
+                          else
+                           t.c_cust_name
+                        end as c_cust_name
+          from temp_20170106 t) t1
+ group by t1.c_proj_code;
+
+--项目资金来源明细
+select t1.c_proj_code,
+       listagg(t1.c_fdsrc_name, ',') within group(order by t1.c_proj_code)
+  from (select distinct t.c_proj_code, t.c_fdsrc_name from temp_20170106 t) t1
+ group by t1.c_proj_code;
