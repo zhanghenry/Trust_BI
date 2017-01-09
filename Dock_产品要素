@@ -1,0 +1,15 @@
+--产品信息
+select a.c_prod_code     as 产品编码,
+       a.c_prod_name     as 产品名称,
+       a.c_proj_code     as 项目编码,
+       b.c_proj_name     as 项目名称,
+       a.c_prod_status   as 产品状态,
+       a.c_prod_status_n as 产品状态,
+       a.d_setup         as 成立日期,
+       a.d_expiry        as 终止日期,
+       a.l_struct_flag   as 是否结构化,
+       a.c_struct_type   as 受益结构类型,
+       a.c_struct_type_n as 受益结构类型
+  from tde_product a, tde_project b
+ where a.c_proj_code = b.c_proj_code(+)
+ order by a.d_setup;
